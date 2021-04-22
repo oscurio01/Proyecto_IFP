@@ -3,12 +3,15 @@ var enemigoRana;
 var lenguaRana;
 var scene;
 var config;
+var attackEnemyList;
+var tiempoRana = 30;
 import * as glish from './glish.js';
 import * as game from './game.js';
 
 export function preload(){
 	this.load.spritesheet('EnemigoRana','assets/image/enemigo.png', {frameWidth:32, frameHeight:32});
 	scene = this;
+    attackEnemyList = this.physics.add.group();
 }
 
 export function createEnemyRana(obj, enemyList, conf){
@@ -30,17 +33,40 @@ export function createEnemyRana(obj, enemyList, conf){
 
     //console.log(glish.glish);
     scene.physics.add.overlap(glish.glish, enemigoRana.trigger, game.activarTrigger, null, scene);
+    scene.physics.add.overlap(glish.glish, enemigoRana.triggerAtaque, createLenguaRana, null, scene);
     scene.physics.add.overlap(glish.beamList, enemigoRana, game.activarTrigger, null, scene);
 
 }
 
 
-function createLenguaRana(obj){
-    lenguaRana = enemyList.create(obj.x,obj.y, 'ondas').setOrigin(0.5); 
-    lenguaRana.name = 'lenguaRana';
-    lenguaRana.vida = enemigoRana.vida;
-    lenguaRana.ataque = 2;
+function createLenguaRana(){
+    if(tiempoRana <=0){
+        tiempoRana = 30;
+
+        lenguaRana = attackEnemyList.create(enemigoRana.x,enemigoRana.y, 'ondas').setOrigin(0.5); 
+        lenguaRana.name = 'lenguaRana';
+        lenguaRana.vida = enemigoRana.vida;
+        lenguaRana.ataque = 2;
+
+        Phaser.Actions.Call(attackEnemyList.getChildren(), function(go) {
+                go.dir = new Phaser.Math.Vector2( Math.cos(go.angle*Math.PI/180), Math.sin(go.angle*Math.PI/180));
+                go.dir.normalize();
+        });
+
+    }
+
+    if(tiempoRana > 0){
+        tiempoRana--;
+    }
 }
 function updateLenguaRana() {
+    if(attackEnemyList.getLenght()){
+       setTimeout(()=>{
+            Phaser.Actions.Call(attackEnemyList.getChildren(), function(go) {
+                go.destroy();
+            });
+            
+        },200);
+    }
     
 }

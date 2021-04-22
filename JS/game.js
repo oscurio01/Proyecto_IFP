@@ -47,7 +47,8 @@ var poisonAspectTiles;
 var poisonTilesId;
 var cutTiles;
 var cutTilesId;
-
+var cutTiles2;
+var cutTilesId2;
 
 function preload(){
 	//this.load.image('bg', 'assets/image/background.jpg');
@@ -84,11 +85,18 @@ function create(){
     fondoAguaBuena = map.createLayer('ground2', tileset2).setDepth(-1);
     fondo = map.createLayer('AguaMala', tileset2).setDepth(-1);
     scene.obstaculos = map.createLayer('Obstaculos', tileset);
+    scene.obstaculos2 = map.createLayer('obstaculo2', tileset);
+    scene.obstaculos3 = map.createLayer('obstaculo3', tileset);
     enemyTileSpawner = map.createFromObjects('RespawnEnemigos');
 
     //fondo.setCollisionByExclusion(-1, true);
     scene.obstaculos.setCollisionByProperty({collides:true});
-    scene.obstaculos.setCollisionByProperty({cut_attack:true});
+
+    scene.obstaculos2.setCollisionByProperty({collides:true});
+    scene.obstaculos2.setCollisionByProperty({cut_attack:true});
+
+    scene.obstaculos3.setCollisionByProperty({collides:true});
+    scene.obstaculos3.setCollisionByProperty({cut_attack:true});
     //Movimiento del veneno
     this.tweens.timeline({
         targets: fondo, duration: 1500,
@@ -137,12 +145,15 @@ function create(){
     fondo.setTileIndexCallback(poisonTilesId, glish.poisonPlayer, this.physics.add.overlap(glish.ondaList, fondo));
     fondo.setTileIndexCallback(poisonAspectTiles, glish.poisonPlayer, this.physics.add.overlap(glish.ondaList, fondo));
 
-    cutTiles = scene.obstaculos.filterTiles(tile => tile.properties.cut_attack).map(x => x.index);
+    cutTiles = scene.obstaculos2.filterTiles(tile => tile.properties.cut_attack).map(x => x.index);
     cutTilesId = [...(new Set(cutTiles))];
-    /*for (let i = 0; i < cutTiles.length; i++) {
-        utilidades.collisionSwitch(scene.obstaculos.filterTiles(tile => tile.properties.cut_attack), true);
-    }*/
-    scene.obstaculos.setTileIndexCallback(cutTilesId, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos));
+
+    cutTiles2 = scene.obstaculos3.filterTiles(tile => tile.properties.cut_attack).map(x => x.index);
+    cutTilesId2 = [...(new Set(cutTiles2))];
+
+    scene.obstaculos2.setTileIndexCallback(cutTilesId, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos2));
+
+    scene.obstaculos3.setTileIndexCallback(cutTilesId2, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos3));
 
     //this.physics.add.overlap(glish.beamList, scene.obstaculos, glish.destroyOnda);
     this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
@@ -202,10 +213,13 @@ function updateEnemySwamp(){
     Phaser.Actions.Call(enemyList.getChildren(), function(go) {
 
         if (go.trigger.active){
-
             go.trigger.x = go.x;
             go.trigger.y = go.y;
             if(go.name == 'rana'){
+                
+                go.triggerAtaque.x = go.x;
+                go.triggerAtaque.y = go.y;
+
                 if(go.tiempoMoverse == 0 && go.status != "paralizado"){
                     scene.physics.moveTo(go, glish.glish.x, glish.glish.y, 500);
                     go.EnAire = true;

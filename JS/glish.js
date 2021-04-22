@@ -22,6 +22,7 @@ export var ondaList;
 var ondaDeDanyo;
 var ondaCura; 
 var vidaText;
+var map;
 
 import * as game from './game.js';
 import * as utilidades from './utilidades.js';
@@ -61,6 +62,8 @@ export function create(){
 
     //console.log(scene.obstaculos);
     scene.physics.add.collider(glish, scene.obstaculos);
+    scene.physics.add.collider(glish, scene.obstaculos2);
+    scene.physics.add.collider(glish, scene.obstaculos3);
 }
 
 export function update(conf){
@@ -239,9 +242,8 @@ export function climbing_plant(obj,casilla){
     if(obj == ondaDeDanyo && casilla.properties.cut_attack){
         console.log("destruida");
         obj.destroy();
-        casilla.properties.collides = false;
-        casilla.properties.cut_attack = false;
         utilidades.collisionSwitch(casilla, false);
+        casilla.properties.cut_attack = false;
         casilla.setAlpha(0);
         
     }
