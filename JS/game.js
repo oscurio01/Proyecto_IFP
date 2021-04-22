@@ -283,6 +283,10 @@ function hitSprites(obj1, obj2){
         if(obj1.trigger !=null){
             obj1.trigger.active = false;
             obj1.trigger.destroy();
+            if(obj1.triggerAtaque !=null){
+              obj1.triggerAtaque.active = false;
+              obj1.triggerAtaque.destroy();
+            }
         }
     }
 }
