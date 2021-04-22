@@ -72,7 +72,7 @@ function preload(){
 function create(){
 
     scene = this;
-
+    document.body.style.cursor = "none";
     camera = this.cameras.main;
     gameOver = 0;
 
