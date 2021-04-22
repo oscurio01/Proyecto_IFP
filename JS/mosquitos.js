@@ -6,13 +6,14 @@ import * as glish from './glish.js';
 import * as game from './game.js';
 
 export function preload(){
-    this.load.image('missile1', 'assets/image/missile1.png');
-    scene = this;
+  this.load.spritesheet('mosq', 'assets/image/mosquito.png', { frameWidth: 32, frameHeight: 32 });
+  scene = this;
 }
 
 export function createEnemyMosquito(obj, enemyList, conf){
     config = conf;
-    enemigoMosquito = enemyList.create(obj.x,obj.y, 'missile1').setOrigin(0.5); 
+    createAnims();
+    enemigoMosquito = enemyList.create(obj.x,obj.y, 'mosq').setOrigin(0.5); 
     enemigoMosquito.name = 'mosquito';
     enemigoMosquito.vida = 7;
     enemigoMosquito.ataque = 1;
@@ -26,5 +27,15 @@ export function createEnemyMosquito(obj, enemyList, conf){
 
     scene.physics.add.overlap(glish.glish, enemigoMosquito.trigger, game.activarTrigger, null, scene);
     scene.physics.add.overlap(glish.beamList, enemigoMosquito, game.activarTrigger, null, scene);
+  enemigoMosquito.play('fly', true);
+}
+
+function createAnims(){
+  scene.anims.create({
+        key: 'fly',
+        frames: scene.anims.generateFrameNumbers("mosq"),
+        frameRate: 10,
+        repeat: -1
+    });
 
 }
