@@ -6,7 +6,7 @@ import * as glish from './glish.js';
 import * as game from './game.js';
 
 export function preload(){
-  this.load.spritesheet('mosq', 'assets/image/mosquito.png', { frameWidth: 32, frameHeight: 32 });
+  this.load.spritesheet('mosq','assets/image/mosquito.png', { frameWidth: 32, frameHeight: 32});
   scene = this;
 }
 
@@ -27,15 +27,6 @@ export function createEnemyMosquito(obj, enemyList, conf){
 
     scene.physics.add.overlap(glish.glish, enemigoMosquito.trigger, game.activarTrigger, null, scene);
     scene.physics.add.overlap(glish.beamList, enemigoMosquito, game.activarTrigger, null, scene);
-  enemigoMosquito.play('fly', true);
-}
 
-function createAnims(){
-  scene.anims.create({
-        key: 'fly',
-        frames: scene.anims.generateFrameNumbers("mosq"),
-        frameRate: 10,
-        repeat: -1
-    });
 
 }

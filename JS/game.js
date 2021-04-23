@@ -110,6 +110,13 @@ function create(){
         faceColor: new Phaser.Display.Color(40,39,37,255)
     });*/
 
+    scene.anims.create({
+      key: 'fly',
+      frames: this.anims.generateFrameNumbers('glish'),
+      frameRate: 1,
+      repeat: -1
+    });
+
     glish.create();
 
     //Marca los puntos obtenidos por derrotar enemigos
@@ -123,7 +130,6 @@ function create(){
 
     //Vida en texto
 
-
     //Enseña los FPS que tiene el juego
     fpsText = this.add.text(16,16,'FPS: '+ game.loop.actualFps,{fontsize:'8px',fill:'#FFF'}).setScrollFactor(0); 
 
@@ -134,8 +140,11 @@ function create(){
             ranas.createEnemyRana(obj, enemyList, config);
         }else if(obj.name == 'mosquito'){
             mosquitos.createEnemyMosquito(obj, enemyList, config);
+            enemigoMosquito.play('fly', true);
         }
     })
+
+
 
     //Overlap
     poisonTiles = fondo.filterTiles(tile => tile.properties.veneno).map(x => x.index);
