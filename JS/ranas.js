@@ -75,7 +75,7 @@ function createLenguaRana(parent){
 function updateLenguaRana(o, atributo){
 	var parent = sacaLengua(atributo)
 	var l = parent.lengua;
-
+ 
 	
 
 	if(l.time <= 0)
