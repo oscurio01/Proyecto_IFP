@@ -12,7 +12,6 @@ export function preload(){
 
 export function createEnemyMosquito(obj, enemyList, conf){
     config = conf;
-    createAnims();
     enemigoMosquito = enemyList.create(obj.x,obj.y, 'mosq').setOrigin(0.5); 
     enemigoMosquito.name = 'mosquito';
     enemigoMosquito.vida = 7;

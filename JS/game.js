@@ -112,8 +112,8 @@ function create(){
 
     scene.anims.create({
       key: 'fly',
-      frames: this.anims.generateFrameNumbers('glish'),
-      frameRate: 1,
+      frames: this.anims.generateFrameNumbers('mosq'),
+      frameRate: 2,
       repeat: -1
     });
 
@@ -140,7 +140,6 @@ function create(){
             ranas.createEnemyRana(obj, enemyList, config);
         }else if(obj.name == 'mosquito'){
             mosquitos.createEnemyMosquito(obj, enemyList, config);
-            enemigoMosquito.play('fly', true);
         }
     })
 
@@ -187,7 +186,7 @@ function create(){
  =        =    =             =       =    =     =          =          =
   ========     =             ========     =     =          =          ========
 */
-function update(){
+function update(time, delta){
 
     if(gameOver == 0){    
 
@@ -243,7 +242,7 @@ function updateEnemySwamp(){
                 }
             }else if(go.name == 'mosquito' && go.status != "paralizado"){
                 scene.physics.moveTo(go, glish.glish.x, glish.glish.y, 200);
-                
+                go.play('fly', true);                
             }
 
             if(go.status == "paralizado" && go.temporizador !=0){
