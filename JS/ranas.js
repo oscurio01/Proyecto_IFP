@@ -45,7 +45,7 @@ function createLenguaRana(){
         lenguaRana.name = 'lenguaRana';
         lenguaRana.vida = enemigoRana.vida;
         lenguaRana.ataque = 2;
-
+ 
     }
 
     if(tiempoRana > 0){
