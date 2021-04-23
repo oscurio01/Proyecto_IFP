@@ -214,13 +214,26 @@ function update(time, delta){
 
 
 export function activarTrigger(e, go){
-    go.active = true;
+
+    if(go.trigger != undefined){
+    	go.trigger.activado = true;
+
+    }
+	else if(e.trigger != undefined)
+	{
+		e.trigger.activado = true;
+	}
+	else{
+    	go.activado = true;
+    }
+
 }
+
 
 function updateEnemySwamp(){
     Phaser.Actions.Call(enemyList.getChildren(), function(go) {
 
-        if (go.trigger.active){
+        if (go.trigger.activado){
             go.trigger.x = go.x;
             go.trigger.y = go.y;
             if(go.name == 'rana'){
@@ -257,7 +270,7 @@ function updateEnemySwamp(){
 
             }
         }
-        //go.trigger.active = false
+        //go.trigger.activado = false
         if(go.inmune >= 0){
             go.inmune--;
         }
@@ -278,7 +291,7 @@ function hitSprites(obj1, obj2){
             repeat: 5,
         });
         obj1.vida -= obj2.ataque;
-        aleatorio = 3;//Math.floor(Math.random() * (20-2+1)) + 2;
+        aleatorio = Math.floor(Math.random() * (20-2+1)) + 2;
         if(obj1 !=glish.glish && aleatorio == 3){
             obj1.status = "paralizado";
             obj1.temporizador = 240;
@@ -289,10 +302,10 @@ function hitSprites(obj1, obj2){
     if(obj1.vida <= 0){
         obj1.destroy();
         if(obj1.trigger !=null){
-            obj1.trigger.active = false;
+            obj1.trigger.activado = false;
             obj1.trigger.destroy();
             if(obj1.triggerAtaque !=null){
-              obj1.triggerAtaque.active = false;
+              obj1.triggerAtaque.activado = false;
               obj1.triggerAtaque.destroy();
             }
         }

@@ -24,10 +24,10 @@ export function createEnemyRana(obj, enemyList, conf){
     enemigoRana.tiempoMoverse = 100;
     enemigoRana.trigger = scene.add.rectangle(enemigoRana.x,enemigoRana.y, config.width/1.5, config.height/1.5);
     scene.physics.add.existing(enemigoRana.trigger, false);
-    enemigoRana.trigger.active = false;
+    enemigoRana.trigger.activado = false;
     enemigoRana.triggerAtaque = scene.add.rectangle(enemigoRana.x,enemigoRana.y, config.width/2, config.height/2);
     scene.physics.add.existing(enemigoRana.triggerAtaque, false);
-    enemigoRana.triggerAtaque.active = false;
+    enemigoRana.triggerAtaque.activado = false;
 
     //console.log(glish.glish);
     scene.physics.add.overlap(glish.glish, enemigoRana.trigger, game.activarTrigger, null, scene);
