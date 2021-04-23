@@ -138,7 +138,7 @@ function ondasRockeras() {
 
   ondaDeDanyo = beamList.create(glish.x, glish.y, 'ondas');
   ondaDeDanyo.ataque = 2;
-  tiempo = 80;
+  tiempo = 40;
   ondaDeDanyo.scale = 0.4;
   ondaDeDanyo.limite = 2;
   ondaDeDanyo.angle = Math.atan2(puntero.y - glish.y, puntero.x - glish.x);
@@ -240,7 +240,6 @@ function updateEstadosDelJugador() {
 export function climbing_plant(obj, casilla) {
 
   if (obj == ondaDeDanyo && casilla.properties.cut_attack) {
-    console.log("destruida");
     obj.destroy();
     utilidades.collisionSwitch(casilla, false);
     casilla.properties.cut_attack = false;

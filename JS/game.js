@@ -2,7 +2,7 @@ import * as glish from './glish.js';
 import * as ranas from './ranas.js';
 import * as mosquitos from './mosquitos.js';
 import * as utilidades from './utilidades.js';
-
+import * as enemigos from './enemigos.js';
 
 var config = {
     type: Phaser.AUTO,
@@ -23,8 +23,12 @@ var config = {
         update:update
     },
     scale:{
-        zoom:2
-    }
+		//mode: Phaser.Scale.FIT,
+		parent: 'game',
+		mode: Phaser.Scale.ENVELOPE,
+        //autoCenter: Phaser.Scale.CENTER_BOTH,
+		//zoom: 2,
+	},
     
 };
 
@@ -39,7 +43,7 @@ var puntos;
 var puntosText;
 var fondo;
 var enemyTileSpawner;
-var enemyList;
+export var enemyList;
 
 var fpsText;
 var poisonTiles;
@@ -75,6 +79,8 @@ function create(){
     document.body.style.cursor = "none";
     camera = this.cameras.main;
     gameOver = 0;
+    
+
 
     const map = this.make.tilemap({key:"pantano"});
 
@@ -127,6 +133,7 @@ function create(){
 
 
     enemyList = this.physics.add.group();
+    enemyList.lengua = this.physics.add.group();
 
     //Vida en texto
 
@@ -137,9 +144,9 @@ function create(){
         this.physics.world.enable(obj);
         obj.setAlpha(0);
         if(obj.name == 'rana'){
-            ranas.createEnemyRana(obj, enemyList, config);
+            ranas.createEnemyRana(obj, config);
         }else if(obj.name == 'mosquito'){
-            mosquitos.createEnemyMosquito(obj, enemyList, config);
+            mosquitos.createEnemyMosquito(obj, config);
         }
     })
 
@@ -163,9 +170,9 @@ function create(){
 
     scene.obstaculos3.setTileIndexCallback(cutTilesId2, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos3));
 
-    //this.physics.add.overlap(glish.beamList, scene.obstaculos, glish.destroyOnda);
     this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
-    this.physics.add.overlap(glish.glish,enemyList, hitSprites);
+    //this.physics.add.overlap(glish.glish,enemyList, hitSprites);
+    //this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
 
 
     //Tamaño de la camara total y seguimiento de la camara al personaje
@@ -188,16 +195,16 @@ function create(){
 */
 function update(time, delta){
 
-    if(gameOver == 0){    
+  if(gameOver == 0){    
 
-        glish.update(config);
-        puntosText.text = "Puntos: " + puntos;
+    glish.update(config);
+    puntosText.text = "Puntos: " + puntos;
 
-        fpsText.text = "FPS: "+game.loop.actualFps;
-        updateEnemySwamp();
+    fpsText.text = "FPS: "+Math.floor(game.loop.actualFps) + " UpRate: " + Math.floor(delta) + "ms";
 
-    }
+    enemigos.updateEnemySwamp(scene);
 
+  }
 
 }
 
@@ -227,54 +234,6 @@ export function activarTrigger(e, go){
     	go.activado = true;
     }
 
-}
-
-
-function updateEnemySwamp(){
-    Phaser.Actions.Call(enemyList.getChildren(), function(go) {
-
-        if (go.trigger.activado){
-            go.trigger.x = go.x;
-            go.trigger.y = go.y;
-            if(go.name == 'rana'){
-                
-                go.triggerAtaque.x = go.x;
-                go.triggerAtaque.y = go.y;
-
-                if(go.tiempoMoverse == 0 && go.status != "paralizado"){
-                    scene.physics.moveTo(go, glish.glish.x, glish.glish.y, 500);
-                    go.EnAire = true;
-                    go.tiempoMoverse = -1;
-                    setTimeout(()=>{
-                        go.tiempoMoverse = Phaser.Math.Between(70, 100);
-                        if(go.body != undefined){
-                            go.setVelocity(0);
-                        }
-                        go.EnAire = false;
-                    },300);
-                }
-            }else if(go.name == 'mosquito' && go.status != "paralizado"){
-                scene.physics.moveTo(go, glish.glish.x, glish.glish.y, 200);
-                go.play('fly', true);                
-            }
-
-            if(go.status == "paralizado" && go.temporizador !=0){
-                go.temporizador--;
-                go.setVelocity(0);
-            }
-            if(go.temporizador == 0){
-                go.status = "none";
-            }
-            if(go.tiempoMoverse != 0){
-                go.tiempoMoverse--;
-
-            }
-        }
-        //go.trigger.activado = false
-        if(go.inmune >= 0){
-            go.inmune--;
-        }
-    }); 
 }
 
 function hitSprites(obj1, obj2){

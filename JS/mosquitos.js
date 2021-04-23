@@ -10,15 +10,14 @@ export function preload(){
   scene = this;
 }
 
-export function createEnemyMosquito(obj, enemyList, conf){
+export function createEnemyMosquito(obj, conf){
     config = conf;
-    enemigoMosquito = enemyList.create(obj.x,obj.y, 'mosq').setOrigin(0.5); 
+    enemigoMosquito = game.enemyList.create(obj.x,obj.y, 'mosq').setOrigin(0.5); 
     enemigoMosquito.name = 'mosquito';
     enemigoMosquito.vida = 7;
     enemigoMosquito.ataque = 1;
     enemigoMosquito.inmune = -1;
     enemigoMosquito.status = "none";
-    enemigoMosquito.EnAire = true;
     enemigoMosquito.tiempoMoverse = 100;
     enemigoMosquito.trigger = scene.add.rectangle(enemigoMosquito.x,enemigoMosquito.y, config.width/1.5, config.height/1.5);
     scene.physics.add.existing(enemigoMosquito.trigger, false);
