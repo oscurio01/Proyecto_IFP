@@ -54,6 +54,8 @@ var cutTilesId;
 var cutTiles2;
 var cutTilesId2;
 
+var pausado = false;
+
 function preload(){
 	//this.load.image('bg', 'assets/image/background.jpg');
 
@@ -171,8 +173,8 @@ function create(){
     scene.obstaculos3.setTileIndexCallback(cutTilesId2, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos3));
 
     this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
-    //this.physics.add.overlap(glish.glish,enemyList, hitSprites);
-    //this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
+    this.physics.add.overlap(glish.glish,enemyList, hitSprites);
+    this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
 
 
     //Tamaño de la camara total y seguimiento de la camara al personaje
@@ -202,19 +204,18 @@ function update(time, delta){
 
     fpsText.text = "FPS: "+Math.floor(game.loop.actualFps) + " UpRate: " + Math.floor(delta) + "ms";
 
-
-    if (glish.keyP.isDown){
-      //TODO:Hacer una variable que cuente el tiempo desde que presionas por primera vez el boton P y cuando ese tiempo pase poder continuar con el juego
-      /*tiempoPause= 30;  if(tiempoPause > 0){tiempoPause--;} if(glish.keyP.isDown && tiempoPause == 0){this.physics.resume();} */
+    if (glish.keyP.isDown && pausado == false){
       this.physics.pause();
-        if(glish.keyP.isDown){
-          
-          this.physics.resume();
-          
-        }
-
+      setTimeout(() => {
+        pausado = true;
+      }, 1000);
     }
-
+    if(glish.keyP.isDown && pausado == true){
+      this.physics.resume();
+      setTimeout(() => {
+        pausado = false;
+      }, 1000);
+    }
     enemigos.updateEnemySwamp(scene);
 
   }

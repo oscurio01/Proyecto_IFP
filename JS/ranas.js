@@ -68,7 +68,7 @@ function createLenguaRana(parent){
 	parent.lengua=new Object;
 	var l = parent.lengua;
 	l.segmentos=new Array;
-	l.maxLong = 15;//cambiando SOLO este numero se ajusta la longitud de la lengua de la rana
+	l.maxLong = 16;//cambiando SOLO este numero se ajusta la longitud de la lengua de la rana
 	l.cooldown = 60;
 	l.time = 0;
 }
@@ -85,14 +85,7 @@ function updateLenguaRana(o, atributo){
 		createLenguaSegments(l, parent)
 		
 		calcularLengua(l, parent)
-		/*this.tweens.addCounter({
-			from: 0,
-			to: 3,
-			duration: 500,
-			onUpdate: function (tween)
-			{
-			}
-		});*/
+    
 	}
 	l.time--;
 }// Lengua es una struct,contiene .segmentos, una array que contiene varias sprites en la que la 0 es la punta, .maxLong que contiene el numero de segmentos maximos, el tiempo para ser lanzada
@@ -161,8 +154,4 @@ function calcularLengua(l, parent)
 			}
 		});
 
-  /*this.tweens.timeline({
-    targets: pincho_horizontal1, ease: 'lineal', duration: 4000,
-    tweens: [{ x: 450, }, { y: 100 },]
-    });*/
 }
