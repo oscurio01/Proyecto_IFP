@@ -9,12 +9,19 @@ var config = {
     width: 400,
     height: 300,
     pixelArt:true,
+	fps: {
+		target: 60,
+		forceSetTimeOut: true
+	},
     physics: {
         default: 'arcade',
         arcade: {
             debug: false,
             gravity: { y: 0 },
-            fps:60
+			/*fps: {
+				target: 30,
+				forceSetTimeOut: true
+			},*/
         }
     },
     scene: {
@@ -174,8 +181,8 @@ function create(){
 
     this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
     this.physics.add.overlap(glish.glish,enemyList, hitSprites);
-    this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
-
+    //this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
+	  console.log(enemyList.lengua);
 
     //Tamaño de la camara total y seguimiento de la camara al personaje
     camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -196,7 +203,6 @@ function create(){
   ========     =             ========     =     =          =          ========
 */
 function update(time, delta){
-
   if(gameOver == 0){    
 
     glish.update(config);

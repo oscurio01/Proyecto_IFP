@@ -158,7 +158,7 @@ function heavyMetal() {
   ondaCura = ondaList.create(glish.x, glish.y, 'cura');
 
   if (glish.vida < 10) {
-    glish.vida += 1;
+    glish.vida += 3;
   }
 
   ondaCura.scale = 0.4;
