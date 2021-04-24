@@ -12,7 +12,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            debug: false,
             gravity: { y: 0 },
             fps:60
         }
@@ -201,6 +201,19 @@ function update(time, delta){
     puntosText.text = "Puntos: " + puntos;
 
     fpsText.text = "FPS: "+Math.floor(game.loop.actualFps) + " UpRate: " + Math.floor(delta) + "ms";
+
+
+    if (glish.keyP.isDown){
+      //TODO:Hacer una variable que cuente el tiempo desde que presionas por primera vez el boton P y cuando ese tiempo pase poder continuar con el juego
+      /*tiempoPause= 30;  if(tiempoPause > 0){tiempoPause--;} if(glish.keyP.isDown && tiempoPause == 0){this.physics.resume();} */
+      this.physics.pause();
+        if(glish.keyP.isDown){
+          
+          this.physics.resume();
+          
+        }
+
+    }
 
     enemigos.updateEnemySwamp(scene);
 

@@ -8,6 +8,7 @@ var keyRight;
 var keyLeft;
 var keyDown;
 var fire;
+export var keyP;
 var relentizar;
 var puntero;
 var config;
@@ -79,6 +80,7 @@ export function update(conf) {
     heavyMetal.call(scene);
   }
 
+
   atacarPersonaje.call(scene);
 
   updateEstadosDelJugador.call(scene);
@@ -110,6 +112,7 @@ function moverKEY() {
   keyLeft = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
   keyDown = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
   fire = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  keyP = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 }
 
 function moverPersonaje() {
