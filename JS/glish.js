@@ -141,7 +141,7 @@ function ondasRockeras() {
 
   ondaDeDanyo = beamList.create(glish.x, glish.y, 'ondas');
   ondaDeDanyo.ataque = 2;
-  tiempo = 40;
+  tiempo = 30;
   ondaDeDanyo.scale = 0.4;
   ondaDeDanyo.limite = 2;
   ondaDeDanyo.angle = Math.atan2(puntero.y - glish.y, puntero.x - glish.x);

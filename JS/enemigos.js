@@ -21,14 +21,14 @@ export function updateEnemySwamp(s){
                     scene.physics.moveTo(go, glish.glish.x, glish.glish.y, 500);
                     go.tiempoMoverse = -1;
                     setTimeout(()=>{
-                        go.tiempoMoverse = Phaser.Math.Between(170, 200);
+                        go.tiempoMoverse = Phaser.Math.Between(50, 70);
                         if(go.body != undefined){
                             go.setVelocity(0);
                         }
                     },300);
                 }
             }else if(go.name == 'mosquito' && go.status != "paralizado"){
-                scene.physics.moveTo(go, glish.glish.x, glish.glish.y, 180);
+                scene.physics.moveTo(go, glish.glish.x, glish.glish.y, Phaser.Math.Between(180, 210));
                 
                 go.play('fly', true);                
             }

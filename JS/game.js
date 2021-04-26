@@ -16,7 +16,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false,
+            debug: true,
             gravity: { y: 0 },
 			/*fps: {
 				target: 30,
@@ -182,7 +182,6 @@ function create(){
     this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
     this.physics.add.overlap(glish.glish,enemyList, hitSprites);
     //this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
-	  console.log(enemyList.lengua);
 
     //Tamaño de la camara total y seguimiento de la camara al personaje
     camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -256,9 +255,9 @@ export function activarTrigger(e, go){
 
 }
 
-function hitSprites(obj1, obj2){
+export function hitSprites(obj1, obj2){
     var aleatorio;
-    //console.log(obj2.ataque+" Y "+obj1.vida);
+    //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
     if(obj1.inmune <= 0){
 
         obj1.setAlpha(0);
@@ -273,10 +272,10 @@ function hitSprites(obj1, obj2){
         aleatorio = Math.floor(Math.random() * (20-2+1)) + 2;
         if(obj1 !=glish.glish && aleatorio == 3){
             obj1.status = "paralizado";
-            obj1.temporizador = 240;
+            obj1.temporizador = 230;
             console.log("paralizado");
         }
-        obj1.inmune = 200;
+        obj1.inmune = 130;
     }
     if(obj1.vida <= 0){
         obj1.destroy();

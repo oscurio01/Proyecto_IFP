@@ -25,11 +25,11 @@ export function createEnemyRana(obj, conf){
     enemigoRana.ataque = 1;
     enemigoRana.inmune = -1;
     enemigoRana.status = "none";
-    enemigoRana.tiempoMoverse = 100;
+    enemigoRana.tiempoMoverse = 50;
     enemigoRana.trigger = scene.add.rectangle(enemigoRana.x,enemigoRana.y, config.width/1.5, config.height/1.5);
     scene.physics.add.existing(enemigoRana.trigger, false);
     enemigoRana.trigger.activado = false;
-    enemigoRana.triggerAtaque = scene.add.rectangle(enemigoRana.x,enemigoRana.y, config.width/2, config.height/2);
+    enemigoRana.triggerAtaque = scene.add.rectangle(enemigoRana.x,enemigoRana.y, config.width/1.75, config.height/1.75);
     scene.physics.add.existing(enemigoRana.triggerAtaque, false);
     enemigoRana.triggerAtaque.activado = false;
 
@@ -85,9 +85,9 @@ function updateLenguaRana(o, atributo){
 		createLenguaSegments(l, parent)
 		
 		calcularLengua(l, parent)
-    
+
     //TODO:Hacer que reciba daño el personaje
-    //scene.physics.add.overlap(glish.glish,l.segmentos, game.hitSprites);
+    scene.physics.add.overlap(glish.glish,l.segmentos, game.hitSprites);
     //console.log(l.segmentos);
 	}
 	l.time--;
@@ -98,15 +98,17 @@ function createLenguaSegments(l, parent)
 	//console.log(l.maxLong)
 	for(var i = 1; i < l.maxLong; i++)
 	{
-	var parte = scene.physics.add.sprite(parent.x,parent.y, 'fragmento_Lengua')
-	parte.angle = Math.atan2(glish.glish.y - parte.y , glish.glish.x - parte.x)* 180/Math.PI;
-	l.segmentos.unshift(parte);
+		var parte = scene.physics.add.sprite(parent.x,parent.y, 	'fragmento_Lengua')
+    	parte.ataque = 1;
+		parte.angle = Math.atan2(glish.glish.y - parte.y , 	glish.glish.x - parte.x)* 180/Math.PI;
+		l.segmentos.unshift(parte);
 
 	}
 
 	var cabeza = scene.physics.add.sprite(parent.x,parent.y, 'punta_Lengua')
  
 	cabeza.angle = Math.atan2(glish.glish.y - cabeza.y , glish.glish.x - cabeza.x)* 180/Math.PI;
+  	cabeza.ataque = 1;
 	l.segmentos.unshift(cabeza);
   
   
