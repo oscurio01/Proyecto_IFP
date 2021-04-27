@@ -30,8 +30,18 @@ html{
 }
 #zoomDiv{
 	float: right;
-	scroll-behavior: absolute;
+	//position: absolute;
+	position: fixed;
+	//margin-top: 100px;
+	margin-left: 86%;
 	width: 12%;
-	height: 60px;
-	background-color: red;
+	background-color: silver;
+}
+#zoomControl
+{
+	font-size: 100%;
+}
+#zoomLog
+{
+	font-size: 100%;
 }

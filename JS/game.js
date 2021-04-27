@@ -68,7 +68,7 @@ function preload(){
 
     this.load.image('tiles', 'assets/atlas/terrain.png');
     this.load.image('tiles2', 'assets/atlas/terrain2.png');
-    this.load.tilemapTiledJSON('pantano', 'JS/PantanoVenenoso.json');
+    this.load.tilemapTiledJSON('pantano', 'JS/PantanoVenenosoVerdadero.json');
     glish.preload.call(this);
     ranas.preload.call(this);
     mosquitos.preload.call(this);
@@ -181,10 +181,9 @@ function create(){
 
     this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
     this.physics.add.overlap(glish.glish,enemyList, hitSprites);
-    //this.physics.add.overlap(glish.glish,enemyList.lengua, hitSprites);
 
     //Tamaño de la camara total y seguimiento de la camara al personaje
-    camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    //camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
 
     //Colisiones
@@ -256,7 +255,7 @@ export function activarTrigger(e, go){
 }
 
 export function hitSprites(obj1, obj2){
-    var aleatorio;
+    var aleatorio, aleatorio2;
     //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
     if(obj1.inmune <= 0){
 
@@ -274,6 +273,12 @@ export function hitSprites(obj1, obj2){
             obj1.status = "paralizado";
             obj1.temporizador = 230;
             console.log("paralizado");
+        }
+        if(obj2.name == "mosquito"){
+          aleatorio2 = Math.floor(Math.random() * (10-1+1)) + 1;
+          if(aleatorio2 == 6){
+            obj2.vida +=1;
+          }
         }
         obj1.inmune = 130;
     }

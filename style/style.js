@@ -3,22 +3,20 @@ function loadEvents()
 {
 	resize();
 
-	//alert(document.getElementById("game")).margin)
-
 	window.addEventListener('resize', resize)
 	suffer()
 
 	document.addEventListener('keydown', (e) => {
 		if (!e.repeat && e.key == "+"){
 			//console.log(`Key "${e.key}" pressed  [event: keydown]`);
-			console.log("+"+document.getElementById("gameBorder").style.width)
+			//console.log("+"+document.getElementById("gameBorder").style.width)
 			zoom += 5;
 			document.getElementById("gameBorder").style.width = zoom+"%";
 			resize();
 		}
 		if (!e.repeat && e.key == "-"){
 			//console.log(`Key "${e.key}" pressed  [event: keydown]`);
-			console.log("-")
+			//console.log("-")
 			zoom -= 5;
 			document.getElementById("gameBorder").style.width = zoom+"%";
 			resize();
@@ -33,6 +31,8 @@ function resize()
 	var mystring = getComputedStyle(document.getElementById("game")).width;
 	mystring = mystring.replace('px','');
 
+	document.getElementById("zoomLog").innerText = zoom+'%';
+
 	document.getElementById("gameBorder").style.height = (3/4*mystring) + "px";
 
 	mystring = mystring/16
@@ -41,8 +41,8 @@ function resize()
 	document.getElementById("gameBorder").style.borderWidth = (5.5*mystring)+"px "+mystring+"px "+mystring+"px "+mystring+"px "
 	
 	//console.log(getComputedStyle(document.getElementById("page")).width + screen.width)
-}//border-width = borderWidth
-//document.getElementById("myBtn").style.height = "50px";
+}
+
 //resize
 
 var asciiart

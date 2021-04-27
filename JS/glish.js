@@ -43,7 +43,8 @@ export function create() {
   glish = scene.physics.add.sprite(500, 200, 'glish').setOrigin(0.5, 0.5);
   glish.status = "none";
   //Vida del jugador
-  glish.vida = 10;
+  glish.maxVida = 10;
+  glish.vida = glish.maxVida;
   glish.inmune = -1;
   glish.tiempoStatus = 0;
 
@@ -157,7 +158,7 @@ function heavyMetal() {
 
   ondaCura = ondaList.create(glish.x, glish.y, 'cura');
 
-  if (glish.vida < 10) {
+  if (glish.vida < glish.maxVida) {
     glish.vida += 3;
   }
 

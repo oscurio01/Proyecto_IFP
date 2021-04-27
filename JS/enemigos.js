@@ -29,7 +29,6 @@ export function updateEnemySwamp(s){
                 }
             }else if(go.name == 'mosquito' && go.status != "paralizado"){
                 scene.physics.moveTo(go, glish.glish.x, glish.glish.y, Phaser.Math.Between(180, 210));
-                
                 go.play('fly', true);                
             }
 
