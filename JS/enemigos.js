@@ -1,11 +1,9 @@
-import * as game from './game.js';
 import * as glish from './glish.js';
-var enemyList;
 var go;
 var scene;
 
-export function updateEnemySwamp(s){
-    Phaser.Actions.Call(game.enemyList.getChildren(), function(go) {
+export function updateEnemySwamp(s, enemyList){
+    Phaser.Actions.Call(enemyList.getChildren(), function(go) {
       scene = s;
 
         if (go.trigger.activado){
@@ -49,4 +47,55 @@ export function updateEnemySwamp(s){
             go.inmune--;
         }
     }); 
+}
+
+export function activarTrigger(e, go){
+
+    if(go.trigger != undefined){
+    	go.trigger.activado = true;
+
+    }
+	else if(e.trigger != undefined)
+	{
+		e.trigger.activado = true;
+	}
+	else{
+    	go.activado = true;
+    }
+
+}
+
+export function recibirDanyo(obj1, obj2){
+    var aleatorio;
+    //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
+    if(obj1.inmune <= 0){
+
+      obj1.setAlpha(0);
+      scene.tweens.add({
+          targets: obj1,
+          alpha: 1,
+          duration: 200,
+          ease: 'Linear',
+          repeat: 5,
+      });
+      obj1.vida -= obj2.ataque;
+      aleatorio = Math.floor(Math.random() * (20-2+1)) + 2;
+      if(obj1 !=glish.glish && aleatorio == 3){
+          obj1.status = "paralizado";
+          obj1.temporizador = 230;
+          console.log("paralizado");
+      }
+      if(obj1.vida <= 0){
+          obj1.destroy();
+          if(obj1.trigger !=null){
+              obj1.trigger.activado = false;
+              obj1.trigger.destroy();
+              if(obj1.triggerAtaque !=null){
+                obj1.triggerAtaque.activado = false;
+                obj1.triggerAtaque.destroy();
+              }
+          }
+      }
+      obj1.inmune = 130;
+    }
 }

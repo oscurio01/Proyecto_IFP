@@ -8,7 +8,7 @@ var ranas = new Array;
 
 
 import * as glish from './glish.js';
-import * as game from './game.js';
+import * as enemigos from './enemigos.js';
 
 export function preload(){
 	this.load.spritesheet('EnemigoRana','assets/image/enemigo.png', {frameWidth:32, frameHeight:32});
@@ -17,9 +17,9 @@ export function preload(){
 	scene = this;
 }
 
-export function createEnemyRana(obj, conf){
+export function createEnemyRana(obj, conf, enemyList){
     config = conf;
-    enemigoRana = game.enemyList.create(obj.x,obj.y, 'EnemigoRana').setOrigin(0.5); 
+    enemigoRana = enemyList.create(obj.x,obj.y, 'EnemigoRana').setOrigin(0.5); 
     enemigoRana.name = 'rana';
     enemigoRana.vida = 7;
     enemigoRana.ataque = 1;
@@ -34,9 +34,9 @@ export function createEnemyRana(obj, conf){
     enemigoRana.triggerAtaque.activado = false;
 
     //console.log(glish.glish);
-    scene.physics.add.overlap(glish.glish, enemigoRana.trigger, game.activarTrigger, null, scene);
+    scene.physics.add.overlap(glish.glish, enemigoRana.trigger, enemigos.activarTrigger, null, scene);
     scene.physics.add.overlap(glish.glish, enemigoRana.triggerAtaque, updateLenguaRana, null, scene);
-    scene.physics.add.overlap(glish.beamList, enemigoRana, game.activarTrigger, null, scene);
+    scene.physics.add.overlap(glish.beamList, enemigoRana, enemigos.activarTrigger, null, scene);
 
 	ranas.push(enemigoRana)
 
@@ -87,7 +87,7 @@ function updateLenguaRana(o, atributo){
 		calcularLengua(l, parent)
 
     //TODO:Hacer que reciba daño el personaje
-    scene.physics.add.overlap(glish.glish,l.segmentos, game.hitSprites);
+    scene.physics.add.overlap(glish.glish,l.segmentos, enemigos.recibirDanyo);
     //console.log(l.segmentos);
 	}
 	l.time--;

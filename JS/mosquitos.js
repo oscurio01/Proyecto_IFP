@@ -3,16 +3,16 @@ var enemigoMosquito;
 var scene;
 var config;
 import * as glish from './glish.js';
-import * as game from './game.js';
+import * as enemigos from './enemigos.js';
 
 export function preload(){
   this.load.spritesheet('mosq','assets/image/mosqui.png', { frameWidth: 32, frameHeight: 32});
   scene = this;
 }
 
-export function createEnemyMosquito(obj, conf){
+export function createEnemyMosquito(obj, conf,enemyList){
     config = conf;
-    enemigoMosquito = game.enemyList.create(obj.x,obj.y, 'mosq').setOrigin(0.5); 
+    enemigoMosquito = enemyList.create(obj.x,obj.y, 'mosq').setOrigin(0.5); 
     enemigoMosquito.name = 'mosquito';
     enemigoMosquito.vida = 7;
     enemigoMosquito.ataque = 1;
@@ -23,8 +23,8 @@ export function createEnemyMosquito(obj, conf){
     scene.physics.add.existing(enemigoMosquito.trigger, false);
     enemigoMosquito.trigger.activado = false;
 
-    scene.physics.add.overlap(glish.glish, enemigoMosquito.trigger, game.activarTrigger, null, scene);
-    scene.physics.add.overlap(glish.beamList, enemigoMosquito, game.activarTrigger, null, scene);
+    scene.physics.add.overlap(glish.glish, enemigoMosquito.trigger, enemigos.activarTrigger, null, scene);
+    scene.physics.add.overlap(glish.beamList, enemigoMosquito, enemigos.activarTrigger, null, scene);
 
 
 }

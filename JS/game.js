@@ -53,6 +53,7 @@ var enemyTileSpawner;
 export var enemyList;
 
 var fpsText;
+var suelo;
 var poisonTiles;
 var poisonAspectTiles;
 var poisonTilesId;
@@ -96,12 +97,12 @@ function create(){
     const tileset = map.addTilesetImage("terreno", "tiles");
     const tileset2 = map.addTilesetImage("terreno2", "tiles2");
 
-    const Suelo = map.createLayer('ground', tileset2,0,0).setDepth(-3);
+    suelo = map.createLayer('ground', tileset2).setDepth(-3);
     fondoAguaBuena = map.createLayer('ground2', tileset2).setDepth(-1);
     fondo = map.createLayer('AguaMala', tileset2).setDepth(-1);
     scene.obstaculos = map.createLayer('Obstaculos', tileset);
-    scene.obstaculos2 = map.createLayer('obstaculo2', tileset);
-    scene.obstaculos3 = map.createLayer('obstaculo3', tileset);
+    scene.obstaculos2 = map.createLayer('obstaculo2', tileset).setDepth(-1);
+    scene.obstaculos3 = map.createLayer('obstaculo3', tileset).setDepth(-1);
     enemyTileSpawner = map.createFromObjects('RespawnEnemigos');
 
     //fondo.setCollisionByExclusion(-1, true);
@@ -153,9 +154,9 @@ function create(){
         this.physics.world.enable(obj);
         obj.setAlpha(0);
         if(obj.name == 'rana'){
-            ranas.createEnemyRana(obj, config);
+            ranas.createEnemyRana(obj, config, enemyList);
         }else if(obj.name == 'mosquito'){
-            mosquitos.createEnemyMosquito(obj, config);
+            mosquitos.createEnemyMosquito(obj, config, enemyList);
         }
     })
 
@@ -179,8 +180,8 @@ function create(){
 
     scene.obstaculos3.setTileIndexCallback(cutTilesId2, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos3));
 
-    this.physics.add.overlap(enemyList, glish.beamList,hitSprites);
-    this.physics.add.overlap(glish.glish,enemyList, hitSprites);
+    this.physics.add.overlap(enemyList, glish.beamList,enemigos.recibirDanyo);
+    this.physics.add.overlap(glish.glish,enemyList, glish.recibirDanyo);
 
     //Tamaño de la camara total y seguimiento de la camara al personaje
     //camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -220,7 +221,7 @@ function update(time, delta){
         pausado = false;
       }, 1000);
     }
-    enemigos.updateEnemySwamp(scene);
+    enemigos.updateEnemySwamp(scene, enemyList);
 
   }
 
@@ -237,60 +238,3 @@ function update(time, delta){
 
 */
 
-
-export function activarTrigger(e, go){
-
-    if(go.trigger != undefined){
-    	go.trigger.activado = true;
-
-    }
-	else if(e.trigger != undefined)
-	{
-		e.trigger.activado = true;
-	}
-	else{
-    	go.activado = true;
-    }
-
-}
-
-export function hitSprites(obj1, obj2){
-    var aleatorio, aleatorio2;
-    //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
-    if(obj1.inmune <= 0){
-
-        obj1.setAlpha(0);
-        scene.tweens.add({
-            targets: obj1,
-            alpha: 1,
-            duration: 200,
-            ease: 'Linear',
-            repeat: 5,
-        });
-        obj1.vida -= obj2.ataque;
-        aleatorio = Math.floor(Math.random() * (20-2+1)) + 2;
-        if(obj1 !=glish.glish && aleatorio == 3){
-            obj1.status = "paralizado";
-            obj1.temporizador = 230;
-            console.log("paralizado");
-        }
-        if(obj2.name == "mosquito"){
-          aleatorio2 = Math.floor(Math.random() * (10-1+1)) + 1;
-          if(aleatorio2 == 6){
-            obj2.vida +=1;
-          }
-        }
-        obj1.inmune = 130;
-    }
-    if(obj1.vida <= 0){
-        obj1.destroy();
-        if(obj1.trigger !=null){
-            obj1.trigger.activado = false;
-            obj1.trigger.destroy();
-            if(obj1.triggerAtaque !=null){
-              obj1.triggerAtaque.activado = false;
-              obj1.triggerAtaque.destroy();
-            }
-        }
-    }
-}

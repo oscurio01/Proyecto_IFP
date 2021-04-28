@@ -25,7 +25,6 @@ var ondaCura;
 var vidaText;
 var map;
 
-import * as game from './game.js';
 import * as utilidades from './utilidades.js';
 
 export function preload() {
@@ -277,4 +276,29 @@ export function poisonPlayer(obj, casilla) {
     }, 7000);
   }
   //console.log(casilla.properties.veneno);
+}
+
+export function recibirDanyo(obj1, obj2){
+    var aleatorio, aleatorio2;
+    //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
+    if(obj1.inmune <= 0){
+
+      obj1.setAlpha(0);
+      scene.tweens.add({
+          targets: obj1,
+          alpha: 1,
+          duration: 200,
+          ease: 'Linear',
+          repeat: 5,
+      });
+      
+      obj1.vida--;
+      if(obj2.name == "mosquito"){
+        aleatorio2 = Math.floor(Math.random() * (10-1+1)) + 1;
+        if(aleatorio2 == 6){
+          obj2.vida +=1;
+        }
+      }
+      obj1.inmune = 130;
+    }
 }
