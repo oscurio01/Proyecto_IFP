@@ -39,7 +39,7 @@ export function create() {
 
   createCursor();
   //Crear la Glish o el jugador
-  glish = scene.physics.add.sprite(500, 200, 'glish').setOrigin(0.5, 0.5);
+  glish = scene.physics.add.sprite(1000, 300, 'glish').setOrigin(0.5, 0.5);
   glish.status = "none";
   //Vida del jugador
   glish.maxVida = 10;
