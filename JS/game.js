@@ -155,7 +155,8 @@ function create(){
         obj.setAlpha(0);
         if(obj.name == 'rana'){
             ranas.createEnemyRana(obj, config, enemyList);
-        }else if(obj.name == 'mosquito'){
+        }
+        if(obj.name == 'mosquito'){
             mosquitos.createEnemyMosquito(obj, config, enemyList);
         }
     })

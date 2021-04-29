@@ -13,7 +13,7 @@ var relentizar;
 var puntero;
 var config;
 var velocity;
-var velocity2;
+var ondaVelocity;
 var tiempo;
 var tiempo2;
 var tiempoEstado;
@@ -55,7 +55,7 @@ export function create() {
   ondaList = scene.physics.add.group();
 
   velocity = 200;
-  velocity2 = 6;
+  ondaVelocity = 400;
   tiempo = 0;
   tiempo2 = 0;
   tiempoEstado = 0;
@@ -65,6 +65,8 @@ export function create() {
   scene.physics.add.collider(glish, scene.obstaculos);
   scene.physics.add.collider(glish, scene.obstaculos2);
   scene.physics.add.collider(glish, scene.obstaculos3);
+  scene.physics.add.collider(beamList, scene.obstaculos);
+
 }
 
 export function update(conf) {
@@ -151,6 +153,9 @@ function ondasRockeras() {
     go.dir.normalize();
   });
 
+  //console.log(beamList)
+  console.log(ondaDeDanyo)
+
 }
 
 function heavyMetal() {
@@ -183,8 +188,9 @@ function atacarPersonaje() {
 
   //Indica el movimiento tanto del disparo recto como el direccionado
   Phaser.Actions.Call(beamList.getChildren(), function (go) {
-    go.x = go.x + velocity2 * go.dir.x;
-    go.y = go.y + velocity2 * go.dir.y;
+
+    go.setVelocityX(ondaVelocity * go.dir.x);
+    go.setVelocityY(ondaVelocity * go.dir.y);
 
     if (go.scale <= go.limite) {
       go.scale += 0.03;
@@ -195,6 +201,12 @@ function atacarPersonaje() {
     if (go.scale >= go.limite) {
       go.destroy();
     }
+
+    if(go.body != undefined && !go.body.blocked.none)
+    {
+      go.destroy();
+    }
+    
   });
 
   Phaser.Actions.Call(ondaList.getChildren(), function (go) {
@@ -252,7 +264,9 @@ export function climbing_plant(obj, casilla) {
 }
 
 export function destroyOnda(obj1, obj2) {
-  obj1.destroy();
+  //obj1.destroy();
+  console.log("hola")
+
 }
 
 export function poisonPlayer(obj, casilla) {
