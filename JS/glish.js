@@ -39,7 +39,7 @@ export function create() {
 
   createCursor();
   //Crear la Glish o el jugador
-  glish = scene.physics.add.sprite(1000, 300, 'glish').setOrigin(0.5, 0.5);
+  glish = scene.physics.add.sprite(1000, 300, 'glish');
   glish.status = "none";
   //Vida del jugador
   glish.maxVida = 10;
@@ -60,12 +60,6 @@ export function create() {
   tiempo2 = 0;
   tiempoEstado = 0;
   relentizar = 0;
-
-  //console.log(scene.obstaculos);
-  scene.physics.add.collider(glish, scene.obstaculos);
-  scene.physics.add.collider(glish, scene.obstaculos2);
-  scene.physics.add.collider(glish, scene.obstaculos3);
-  scene.physics.add.collider(beamList, scene.obstaculos);
 
 }
 
@@ -153,9 +147,6 @@ function ondasRockeras() {
     go.dir.normalize();
   });
 
-  //console.log(beamList)
-  console.log(ondaDeDanyo)
-
 }
 
 function heavyMetal() {
@@ -202,11 +193,10 @@ function atacarPersonaje() {
       go.destroy();
     }
 
-    if(go.body != undefined && !go.body.blocked.none)
-    {
+    if (go.body != undefined && !go.body.blocked.none) {
       go.destroy();
     }
-    
+
   });
 
   Phaser.Actions.Call(ondaList.getChildren(), function (go) {
@@ -262,13 +252,6 @@ export function climbing_plant(obj, casilla) {
 
   }
 }
-
-export function destroyOnda(obj1, obj2) {
-  //obj1.destroy();
-  console.log("hola")
-
-}
-
 export function poisonPlayer(obj, casilla) {
   if (obj == glish && casilla.properties.veneno) {
     glish.status = "envenenado";
@@ -292,27 +275,27 @@ export function poisonPlayer(obj, casilla) {
   //console.log(casilla.properties.veneno);
 }
 
-export function recibirDanyo(obj1, obj2){
-    var aleatorio, aleatorio2;
-    //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
-    if(obj1.inmune <= 0){
+export function recibirDanyo(obj1, obj2) {
+  var aleatorio, aleatorio2;
+  //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
+  if (obj1.inmune <= 0) {
 
-      obj1.setAlpha(0);
-      scene.tweens.add({
-          targets: obj1,
-          alpha: 1,
-          duration: 200,
-          ease: 'Linear',
-          repeat: 5,
-      });
-      
-      obj1.vida--;
-      if(obj2.name == "mosquito"){
-        aleatorio2 = Math.floor(Math.random() * (10-1+1)) + 1;
-        if(aleatorio2 == 6){
-          obj2.vida +=1;
-        }
+    obj1.setAlpha(0);
+    scene.tweens.add({
+      targets: obj1,
+      alpha: 1,
+      duration: 200,
+      ease: 'Linear',
+      repeat: 5,
+    });
+
+    obj1.vida--;
+    if (obj2.name == "mosquito") {
+      aleatorio2 = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+      if (aleatorio2 == 6) {
+        obj2.vida += 1;
       }
-      obj1.inmune = 130;
     }
+    obj1.inmune = 130;
+  }
 }

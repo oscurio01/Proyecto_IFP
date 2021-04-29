@@ -192,6 +192,11 @@ function create(){
 
     this.physics.add.collider(enemyList, enemyList);
 
+    this.physics.add.collider(glish.glish, scene.obstaculos);
+    this.physics.add.collider(glish.glish, scene.obstaculos2);
+    this.physics.add.collider(glish.glish, scene.obstaculos3);
+    this.physics.add.collider(glish.beamList, scene.obstaculos);
+
 }
 /*
  =        =   ==========     ========     =======    =============    ========
