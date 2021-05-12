@@ -103,6 +103,7 @@ function create(){
     scene.obstaculos = map.createLayer('Obstaculos', tileset);
     scene.obstaculos2 = map.createLayer('obstaculo2', tileset).setDepth(-1);
     scene.obstaculos3 = map.createLayer('obstaculo3', tileset).setDepth(-1);
+    scene.copaDeArbol = map.createLayer('copaDelArbol', tileset);
     enemyTileSpawner = map.createFromObjects('RespawnEnemigos');
 
     //fondo.setCollisionByExclusion(-1, true);
