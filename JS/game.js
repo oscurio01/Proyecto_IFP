@@ -16,7 +16,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            debug: false,
             gravity: { y: 0 },
 			/*fps: {
 				target: 30,
@@ -184,8 +184,7 @@ function create(){
     this.physics.add.overlap(enemyList, glish.beamList,enemigos.recibirDanyo);
     this.physics.add.overlap(glish.glish,enemyList, glish.recibirDanyo);
 
-    //Tamaño de la camara total y seguimiento de la camara al personaje
-    //camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
 
 
     //Colisiones

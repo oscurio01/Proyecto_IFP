@@ -98,7 +98,7 @@ function createLenguaSegments(l, parent)
 	//console.log(l.maxLong)
 	for(var i = 1; i < l.maxLong; i++)
 	{
-		var parte = scene.physics.add.sprite(parent.x,parent.y, 	'fragmento_Lengua')
+		var parte = scene.physics.add.sprite(parent.x,parent.y, 'fragmento_Lengua')
     	parte.ataque = 1;
 		parte.angle = Math.atan2(glish.glish.y - parte.y , 	glish.glish.x - parte.x)* 180/Math.PI;
 		l.segmentos.unshift(parte);
