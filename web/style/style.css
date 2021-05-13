@@ -13,7 +13,7 @@ html{
 #gameBorder{
 	float: none;
 	//background-color: green;
-	width: 50%;
+	width: 65%;
 	//height: 1px;
 	//display: block;
 	//padding-top: 75%;
@@ -27,8 +27,6 @@ html{
 }
 #asciiShit{
 	font-size: 8px;
-	background-color: rgb(255, 255, 255);
-	position: absolute;
 }
 #zoomDiv{
 	float: right;

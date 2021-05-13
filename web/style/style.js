@@ -1,13 +1,10 @@
 
 function loadEvents()
 {
-	console.log("Izan's repl https://ProyectoIFP-1.oscurio01.repl.co")
-	console.log("Maria's repl https://IcePrototype.marialopezifp.repl.co")
-	console.log("My repl https://lab-prototype.skullag.repl.co")
 	resize();
 
 	window.addEventListener('resize', resize)
-	suffer()// descomentar
+	suffer()
 
 	document.addEventListener('keydown', (e) => {
 		if (!e.repeat && e.key == "+"){
@@ -27,7 +24,7 @@ function loadEvents()
 	});
 }
 
-var zoom = 50;
+var zoom = 65;
 
 function resize()
 {
@@ -52,7 +49,7 @@ var asciiart
 
 function suffer()
 {
-	var num = Math.floor(Math.random()*6)+1;
+	var num = Math.floor(Math.random()*5)+1;
 	console.log('sufferAscii: '+num)
 	fetch('style/suffer'+num+'.txt')
 	.then(response => response.text())
