@@ -18,10 +18,6 @@ var config = {
         arcade: {
             debug: true,
             gravity: { y: 0 },
-			/*fps: {
-				target: 30,
-				forceSetTimeOut: true
-			},*/
         }
     },
     scene: {
