@@ -65,7 +65,7 @@ function preload(){
 
     this.load.image('tiles', 'assets/atlas/terrain.png');
     this.load.image('tiles2', 'assets/atlas/terrain2.png');
-    this.load.tilemapTiledJSON('pantano', 'JS/PantanoVenenosoVerdadero.json');
+    this.load.tilemapTiledJSON('pantano', 'JS/PantanoVenenosoVerdadero1.json');
     glish.preload.call(this);
     ranas.preload.call(this);
     mosquitos.preload.call(this);
@@ -99,7 +99,7 @@ function create(){
     scene.obstaculos = map.createLayer('Obstaculos', tileset);
     scene.obstaculos2 = map.createLayer('obstaculo2', tileset).setDepth(-1);
     scene.obstaculos3 = map.createLayer('obstaculo3', tileset).setDepth(-1);
-    scene.copaDeArbol = map.createLayer('copaDelArbol', tileset);
+    scene.copaDeArbol = map.createLayer('copaDelArbol', tileset).setDepth(2);
     enemyTileSpawner = map.createFromObjects('RespawnEnemigos');
 
     //fondo.setCollisionByExclusion(-1, true);
