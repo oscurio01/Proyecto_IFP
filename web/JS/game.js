@@ -132,6 +132,8 @@ function create(){
 
     glish.create();
 
+    console.log(glish.glish.x + glish.glish.y );
+
     //Marca los puntos obtenidos por derrotar enemigos
     puntos = 0;
     puntosText =this.add.text(16,-63,'Puntos: '+ puntos,{fontsize:'8px',fill:'#FFF'}).setScrollFactor(0);
