@@ -39,7 +39,7 @@ export function create() {
 
   createCursor();
   //Crear la Glish o el jugador
-  glish = scene.physics.add.sprite(1600, 500, 'glish');
+  glish = scene.physics.add.sprite(2130, 432, 'glish');
   glish.status = "none";
   //Vida del jugador
   glish.maxVida = 10;
@@ -50,7 +50,7 @@ export function create() {
   moverKEY();
 
   scene.cameras.main.startFollow(glish);
-  vidaText = scene.add.text(16, 0, 'Vida: ' + glish.vida, { fontsize: '8px', fill: '#FFF' }).setScrollFactor(0);
+  vidaText = scene.add.text(16, 0, 'Vida: ' + glish.vida, { fontsize: '8px', fill: '#FFF' }).setScrollFactor(0).setDepth(10);
   beamList = scene.physics.add.group();
   ondaList = scene.physics.add.group();
 

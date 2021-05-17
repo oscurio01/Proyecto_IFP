@@ -40,12 +40,9 @@ var game=new Phaser.Game(config);
 var scene;
 var camera;
 var gameOver;
-
 var fondoAguaBuena;
-var puntos;
-var puntosText;
 var fondo;
-var enemyTileSpawner;
+var tileSpawner;
 export var enemyList;
 
 var fpsText;
@@ -101,10 +98,10 @@ function create(){
     scene.obstaculos = map.createLayer('Obstaculos', tileset);
     scene.obstaculos2 = map.createLayer('obstaculo2', tileset).setDepth(-1);
     scene.obstaculos3 = map.createLayer('obstaculo3', tileset).setDepth(-1);
-    scene.copaDeArbol = map.createLayer('copaDelArbol', tileset).setDepth(2);
-    scene.casa1 = map.createLayer('casa1', tileset3).setDepth(2);
-    scene.casa2 = map.createLayer('casa2', tileset3).setDepth(2);
-    enemyTileSpawner = map.createFromObjects('RespawnEnemigos');
+    scene.copaDeArbol = map.createLayer('copaDelArbol', tileset).setDepth(3);
+    scene.casa1 = map.createLayer('casa1', tileset3);
+    scene.casa2 = map.createLayer('casa2', tileset3);
+    tileSpawner = map.createFromObjects('RespawnEnemigos');
 
     //fondo.setCollisionByExclusion(-1, true);
     scene.obstaculos.setCollisionByProperty({collides:true});
@@ -137,13 +134,6 @@ function create(){
       repeat: -1
     });
 
-    glish.create();
-
-    console.log(glish.glish.x + glish.glish.y );
-
-    //Marca los puntos obtenidos por derrotar enemigos
-    puntos = 0;
-    puntosText =this.add.text(16,-63,'Puntos: '+ puntos,{fontsize:'8px',fill:'#FFF'}).setScrollFactor(0);
     
     //Grupos Creados
 
@@ -151,20 +141,21 @@ function create(){
     enemyList = this.physics.add.group();
     enemyList.lengua = this.physics.add.group();
 
-    //Vida en texto
-
+    glish.create();
+    
     //Enseña los FPS que tiene el juego
-    fpsText = this.add.text(16,16,'FPS: '+ game.loop.actualFps,{fontsize:'8px',fill:'#FFF'}).setScrollFactor(0); 
+    fpsText = this.add.text(16,16,'FPS: '+ game.loop.actualFps,{fontsize:'8px',fill:'#FFF'}).setScrollFactor(0).setDepth(10);
 
-    enemyTileSpawner.forEach(obj => {
+    tileSpawner.forEach(obj => {
         this.physics.world.enable(obj);
         obj.setAlpha(0);
         if(obj.name == 'rana'){
             ranas.createEnemyRana(obj, config, enemyList);
         }
-        if(obj.name == 'mosquito'){
+        else if(obj.name == 'mosquito'){
             mosquitos.createEnemyMosquito(obj, config, enemyList);
         }
+
     })
 
 
@@ -203,6 +194,8 @@ function create(){
     this.physics.add.collider(glish.glish, scene.casa1);
     this.physics.add.collider(glish.glish, scene.casa2);
     this.physics.add.collider(glish.beamList, scene.obstaculos);
+    this.physics.add.collider(glish.beamList, scene.casa1);
+    this.physics.add.collider(glish.beamList, scene.casa2);
 
 }
 /*
@@ -218,7 +211,6 @@ function update(time, delta){
   if(gameOver == 0){    
 
     glish.update(config);
-    puntosText.text = "Puntos: " + puntos;
 
     fpsText.text = "FPS: "+Math.floor(game.loop.actualFps) + " UpRate: " + Math.floor(delta) + "ms";
 
