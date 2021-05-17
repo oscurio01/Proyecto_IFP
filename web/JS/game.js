@@ -112,6 +112,9 @@ function create(){
     scene.obstaculos2.setCollisionByProperty({collides:true});
     scene.obstaculos2.setCollisionByProperty({cut_attack:true});
 
+    scene.casa1.setCollisionByProperty({collides:true});
+    scene.casa2.setCollisionByProperty({collides:true});
+
     scene.obstaculos3.setCollisionByProperty({collides:true});
     scene.obstaculos3.setCollisionByProperty({cut_attack:true});
     //Movimiento del veneno
@@ -197,6 +200,8 @@ function create(){
     this.physics.add.collider(glish.glish, scene.obstaculos);
     this.physics.add.collider(glish.glish, scene.obstaculos2);
     this.physics.add.collider(glish.glish, scene.obstaculos3);
+    this.physics.add.collider(glish.glish, scene.casa1);
+    this.physics.add.collider(glish.glish, scene.casa2);
     this.physics.add.collider(glish.beamList, scene.obstaculos);
 
 }
