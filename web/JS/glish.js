@@ -109,6 +109,7 @@ function moverKEY() {
   keyDown = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
   fire = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   keyP = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+
 }
 
 function moverPersonaje() {
