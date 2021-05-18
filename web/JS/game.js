@@ -3,7 +3,9 @@ import * as ranas from './ranas.js';
 import * as mosquitos from './mosquitos.js';
 import * as utilidades from './utilidades.js';
 import * as enemigos from './enemigos.js';
-
+import * as portal from './portal.js';
+import * as npc from './NPC.js';
+console.clear();
 var config = {
     type: Phaser.AUTO,
     width: 400,
@@ -63,10 +65,12 @@ function preload(){
     this.load.image('tiles', 'assets/atlas/terrain.png');
     this.load.image('tiles2', 'assets/atlas/terrain2.png');
     this.load.image('tiles3', 'assets/atlas/terrain3.png');
-    this.load.tilemapTiledJSON('pantano', 'JS/PantanoVenenosoVerdadero1.json');
+    this.load.tilemapTiledJSON('pantano', 'JS/PantanoVenenosoVerdadero.json');
     glish.preload.call(this);
     ranas.preload.call(this);
     mosquitos.preload.call(this);
+	  portal.preload.call(this);
+    npc.preload.call(this);
 }
 /*
   =======    =========    ========    =======    ===============    ========
@@ -99,8 +103,8 @@ function create(){
     scene.obstaculos2 = map.createLayer('obstaculo2', tileset).setDepth(-1);
     scene.obstaculos3 = map.createLayer('obstaculo3', tileset).setDepth(-1);
     scene.copaDeArbol = map.createLayer('copaDelArbol', tileset).setDepth(3);
-    scene.casa1 = map.createLayer('casa1', tileset3);
     scene.casa2 = map.createLayer('casa2', tileset3);
+    scene.casa1 = map.createLayer('casa1', tileset3);
     tileSpawner = map.createFromObjects('RespawnEnemigos');
 
     //fondo.setCollisionByExclusion(-1, true);
@@ -154,9 +158,14 @@ function create(){
         }
         else if(obj.name == 'mosquito'){
             mosquitos.createEnemyMosquito(obj, config, enemyList);
+        }else if(obj.name == 'conseguir_glish'){
+            npc.create(obj);
         }
 
     })
+
+	portal.createAnims();
+	portal.create(tileSpawner);
 
 
 
@@ -196,6 +205,9 @@ function create(){
     this.physics.add.collider(glish.beamList, scene.obstaculos);
     this.physics.add.collider(glish.beamList, scene.casa1);
     this.physics.add.collider(glish.beamList, scene.casa2);
+    this.physics.add.collider(glish.beamList, scene.obstaculos3);
+
+	portal.collisionPortal(glish.glish)
 
 }
 /*
@@ -227,6 +239,10 @@ function update(time, delta){
       }, 1000);
     }
     enemigos.updateEnemySwamp(scene, enemyList);
+
+	portal.update();
+
+  npc.update();
 
   }
 

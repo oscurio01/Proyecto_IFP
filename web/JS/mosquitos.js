@@ -6,7 +6,7 @@ import * as glish from './glish.js';
 import * as enemigos from './enemigos.js';
 
 export function preload(){
-  this.load.spritesheet('mosq','assets/image/mosqui.png', { frameWidth: 32, frameHeight: 32});
+  this.load.spritesheet('mosq','assets/images/mosqui.png', { frameWidth: 32, frameHeight: 32});
   scene = this;
 }
 

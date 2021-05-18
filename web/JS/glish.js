@@ -28,10 +28,10 @@ var map;
 import * as utilidades from './utilidades.js';
 
 export function preload() {
-  this.load.image('missile1', 'assets/image/missile1.png');
-  this.load.spritesheet('glish', 'assets/image/Glish.png', { frameWidth: 32, frameHeight: 32 });
-  this.load.spritesheet('ondas', 'assets/image/ondas.png', { frameWidth: 32, frameHeight: 32 });
-  this.load.spritesheet('cura', 'assets/image/AitorMolestaParte1.png', { frameWidth: 32, frameHeight: 32 });
+  this.load.image('missile1', 'assets/images/missile1.png');
+  this.load.spritesheet('glish', 'assets/images/Glish.png', { frameWidth: 32, frameHeight: 32 });
+  this.load.spritesheet('ondas', 'assets/images/ondas.png', { frameWidth: 32, frameHeight: 32 });
+  this.load.spritesheet('cura', 'assets/images/AitorMolestaParte1.png', { frameWidth: 32, frameHeight: 32 });
   scene = this;
 }
 
