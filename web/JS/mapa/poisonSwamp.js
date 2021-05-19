@@ -155,7 +155,7 @@ function create(){
         }else if(obj.name == 'conseguir_glish'){
             npc.create(obj);        
         }else if(obj.name == 'BossCalamar'){
-             swampBoss.createBoss(obj, config);
+             swampBoss.createBoss(obj, config, enemyList);
         }
 
     })
@@ -234,6 +234,7 @@ function update(time, delta){
       }, 1000);
     }
     enemigos.updateEnemySwamp(scene, enemyList);
+    swampBoss.updateBoss();
 
 	portal.update();
 

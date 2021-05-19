@@ -1502,7 +1502,7 @@
                         {
                          "name":"destino",
                          "type":"int",
-                         "value":2
+                         "value":4
                         }, 
                         {
                          "name":"puerta",

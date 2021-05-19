@@ -1,3 +1,5 @@
+import * as utilidades from './utilidades.js';
+import * as swampBoss from './SwampBoss.js';
 
 var scene;
 var pointer;
@@ -24,8 +26,6 @@ var ondaDeDanyo;
 var ondaCura;
 var vidaText;
 var map;
-
-import * as utilidades from './utilidades.js';
 
 export function preload() {
   this.load.image('missile1', 'assets/images/missile1.png');
@@ -262,7 +262,7 @@ export function poisonPlayer(obj, casilla) {
     relentizar = 100;
 
   }
-  else if ((casilla.properties.aspectoVeneno || casilla.properties.veneno) && (obj == ondaList || obj != glish)) {
+  else if ((casilla.properties.aspectoVeneno ||casilla.properties.veneno) && (obj == ondaList || obj != glish) && !swampBoss.enemigoBoss.trigger.activado) {
     casilla.setAlpha(0);
     casilla.properties.veneno = false;
 
