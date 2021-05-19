@@ -27,7 +27,12 @@ export function updateEnemySwamp(s, enemyList){
                 }
             }else if(go.name == 'mosquito' && go.status != "paralizado"){
                 scene.physics.moveTo(go, glish.glish.x, glish.glish.y, Phaser.Math.Between(180, 210));
-                go.play('fly', true);                
+                go.play('fly', true);  
+                if(go.x < glish.glish.x){
+                  go.flipX = true;
+                }else{
+                  go.flipX = false;
+                }
             }
 
             if(go.status == "paralizado" && go.temporizador !=0){

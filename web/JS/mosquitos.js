@@ -23,6 +23,13 @@ export function createEnemyMosquito(obj, conf,enemyList){
     scene.physics.add.existing(enemigoMosquito.trigger, false);
     enemigoMosquito.trigger.activado = false;
 
+    scene.anims.create({
+      key: 'fly',
+      frames: scene.anims.generateFrameNumbers('mosq'),
+      frameRate: 15,
+      repeat: -1
+    });
+
     scene.physics.add.overlap(glish.glish, enemigoMosquito.trigger, enemigos.activarTrigger, null, scene);
     scene.physics.add.overlap(glish.beamList, enemigoMosquito, enemigos.activarTrigger, null, scene);
 
