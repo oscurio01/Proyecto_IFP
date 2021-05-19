@@ -5,6 +5,7 @@ import * as utilidades from '../utilidades.js';
 import * as enemigos from '../enemigos.js';
 import * as portal from '../portal.js';
 import * as npc from '../NPC.js';
+import * as swampBoss from '../SwampBoss.js'
 console.clear();
 var config = {
     type: Phaser.AUTO,
@@ -70,6 +71,7 @@ function preload(){
     mosquitos.preload.call(this);
 	  portal.preload.call(this);
     npc.preload.call(this);
+    swampBoss.preload.call(this);
 }
 /*
   =======    =========    ========    =======    ===============    ========
@@ -151,14 +153,15 @@ function create(){
         else if(obj.name == 'mosquito'){
             mosquitos.createEnemyMosquito(obj, config, enemyList);
         }else if(obj.name == 'conseguir_glish'){
-            npc.create(obj);
+            npc.create(obj);        
+        }else if(obj.name == 'BossCalamar'){
+             swampBoss.createBoss(obj, config);
         }
 
     })
 
 	portal.createAnims();
 	portal.create(tileSpawner);
-
 
 
     //Overlap
