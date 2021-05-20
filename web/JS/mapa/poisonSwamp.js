@@ -184,9 +184,10 @@ function create(){
 
     this.physics.add.overlap(enemyList, glish.beamList,enemigos.recibirDanyo);
     this.physics.add.overlap(glish.glish,enemyList, glish.recibirDanyo);
+    this.physics.add.overlap(swampBoss.enemigoBoss, glish.beamList,enemigos.recibirDanyo);
+    this.physics.add.overlap(glish.glish,swampBoss.enemigoBoss, glish.recibirDanyo);
 
-
-
+  
 
     //Colisiones
 
