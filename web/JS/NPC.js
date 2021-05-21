@@ -1,6 +1,7 @@
 import * as utilidades from './utilidades.js';
 import * as glish from './glish.js';
 var npc1, scene, interacturar, keyE;
+
 export function preload() {
   this.load.spritesheet('npc1', 'assets/images/Glish.png', { frameWidth: 32, frameHeight: 32 });
   this.load.spritesheet('buttonE', 'assets/images/buttonE.png', { frameWidth: 22, frameHeight: 44 });
@@ -20,17 +21,19 @@ export function create(obj) {
 		frameRate: 2,
 		repeat: -1
 	});
+
+  scene.label = scene.add.text(50,50, '').setDepth(1).setScrollFactor(0).setWordWrapWidth(200);
+	  //typewriteTextWrapped('Hello, World!')
   scene.physics.add.overlap(glish.glish, npc1.trigger, activarTrigger, null, scene);
 
 }
 
 function activarTrigger(player, npc){
-  interacturar.setPosition(player.x, player.y - 32);
+  
+  interacturar.setPosition(player.x-64, player.y - 32);
   interacturar.setDepth(1);
   interacturar.anims.play('inter', true);
-  if(keyE.isDown){
-      console.log("tonto")
-  }
+  typewriteText('Estamos '+glish.glish.vida+' tontos');
 
 
 }
@@ -43,4 +46,20 @@ export function update(){
     interacturar.setAlpha(0);
   }
 
+}
+
+function typewriteText(text)
+{
+	const length = text.length
+	let i = 0
+
+	scene.time.addEvent({
+		callback: () => {
+			  scene.label.text += text[i];
+			  ++i;
+		},
+		repeat: length - 1,
+		delay: 200
+	})
+  
 }
