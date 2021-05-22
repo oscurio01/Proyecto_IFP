@@ -182,7 +182,8 @@ function create(){
 
     scene.obstaculos3.setTileIndexCallback(cutTilesId2, glish.climbing_plant, this.physics.add.overlap(glish.beamList, scene.obstaculos3));
 
-    this.physics.add.overlap(enemyList, glish.beamList,enemigos.recibirDanyo);
+    this.physics.add.overlap(enemyList, glish.beamList, enemigos.recibirDanyo);
+
     this.physics.add.overlap(glish.glish,enemyList, glish.recibirDanyo);
     this.physics.add.overlap(swampBoss.enemigoBoss, glish.beamList,enemigos.recibirDanyo);
     this.physics.add.overlap(glish.glish,swampBoss.enemigoBoss, glish.recibirDanyo);

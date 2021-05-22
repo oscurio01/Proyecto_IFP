@@ -1,11 +1,10 @@
 
-var enemigoRana;
+export var enemigoRana;
 var lenguaRana;
 var scene;
 var config;
 var tiempoRana = 30;
 var ranas = new Array;
-
 
 import * as glish from './glish.js';
 import * as enemigos from './enemigos.js';

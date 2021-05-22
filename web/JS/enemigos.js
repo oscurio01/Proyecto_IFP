@@ -1,6 +1,8 @@
 import * as glish from './glish.js';
 var go;
 var scene;
+export var contadorRana = 2;
+export var contadorMosquitos = 1;
 
 export function updateEnemySwamp(s, enemyList){
     Phaser.Actions.Call(enemyList.getChildren(), function(go) {
@@ -72,7 +74,7 @@ export function activarTrigger(e, go){
 
 export function recibirDanyo(obj1, obj2){
     var aleatorio;
-    console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
+    //console.log("Ataque "+obj2.ataque+" vida "+obj1.vida);
     if(obj1.inmune <= 0){
       obj1.setAlpha(0);
       scene.tweens.add({
@@ -90,6 +92,11 @@ export function recibirDanyo(obj1, obj2){
           console.log("paralizado");
       }
       if(obj1.vida <= 0){
+        if(obj1.name == "mosquito" && contadorMosquitos > 0){ 
+          contadorMosquitos-=1;
+        }else if(obj1.name == "rana" && contadorRana > 0){
+          contadorRana-=1;
+        }
           obj1.destroy();
           if(obj1.trigger !=null){
               obj1.trigger.activado = false;

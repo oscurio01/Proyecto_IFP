@@ -1,5 +1,5 @@
 
-var enemigoMosquito;
+export var enemigoMosquito;
 var scene;
 var config;
 import * as glish from './glish.js';
