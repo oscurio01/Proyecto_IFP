@@ -69,6 +69,6 @@ export function update(){
         dialogo.setAlpha(0);
     dialogoText.setAlpha(0);
   }
-  dialogoText.text = "ranas: " + ranas.contadorRana + "\n mosquitos:"+ mosquitos.contadorMosquitos;
+  dialogoText.text = "ranas: " + enemigos.contadorRana + "\n mosquitos:"+ enemigos.contadorMosquitos;
 
 }
