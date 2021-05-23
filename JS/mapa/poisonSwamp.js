@@ -155,7 +155,9 @@ function create(){
         }else if(obj.name == 'conseguir_glish'){
             npc.create(obj);        
         }else if(obj.name == 'BossCalamar'){
-             swampBoss.createBoss(obj, config, enemyList);
+            swampBoss.createBoss(obj, config, enemyList);
+        }else if(obj.name == 'tentaculos'){
+            swampBoss.generateTentacles(obj);
         }
 
     })
@@ -185,6 +187,7 @@ function create(){
     this.physics.add.overlap(enemyList, glish.beamList, enemigos.recibirDanyo);
 
     this.physics.add.overlap(glish.glish,enemyList, glish.recibirDanyo);
+    this.physics.add.overlap(glish.glish,swampBoss.tentacleSegmentsGroup, glish.recibirDanyo);
     this.physics.add.overlap(swampBoss.enemigoBoss, glish.beamList,enemigos.recibirDanyo);
     this.physics.add.overlap(glish.glish,swampBoss.enemigoBoss, glish.recibirDanyo);
 
@@ -193,6 +196,7 @@ function create(){
     //Colisiones
 
     this.physics.add.collider(enemyList, enemyList);
+
 
     this.physics.add.collider(glish.glish, scene.obstaculos);
     this.physics.add.collider(glish.glish, scene.obstaculos2);

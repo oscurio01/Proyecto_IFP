@@ -105,6 +105,9 @@ export function recibirDanyo(obj1, obj2){
                 obj1.triggerAtaque.activado = false;
                 obj1.triggerAtaque.destroy();
               }
+              if(obj1.block != null){
+                obj1.block.destroy();
+              }
           }
       }
       obj1.inmune = 130;
