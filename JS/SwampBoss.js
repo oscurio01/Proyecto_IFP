@@ -2,6 +2,7 @@ import * as glish from './glish.js';
 import * as utilidades from './utilidades.js';
 
 var config;
+var s
 export var enemigoBoss;
 var scene;
 var tentaculos;
@@ -20,7 +21,7 @@ export function createBoss(obj, conf, el){
     tentacleList = scene.physics.add.group();
     config = conf;
     enemigoBoss = scene.physics.add.sprite(obj.x,obj.y, 'BossSwamp').setOrigin(0.5); 
-    enemigoBoss.vida = 10;
+    enemigoBoss.vida = 2;
     enemigoBoss.ataque = 1;
     enemigoBoss.inmune = -1;
     enemigoBoss.temporizador = 0;
@@ -41,7 +42,7 @@ export function createBoss(obj, conf, el){
 export function generateTentacles(obj){
 
   utilidades.convertToProperties(obj)
-	var s =  tentacleList.create(obj.x,obj.y, 'tentacle'/*, 3*/);
+  s =  tentacleList.create(obj.x,obj.y, 'tentacle'/*, 3*/);
 	s.inmovil = false;
 	s.dano = 1;
 
@@ -121,8 +122,8 @@ function calcularSegmento(parent)
 					if(value-temp>0)
 					{
 						scene.physics.moveTo(parent.segmentos.getChildren()[i],
-							parent.x + 8*((value-temp)*dir.x),
-							parent.y + ((8*((value-temp)*dir.y))),
+							parent.x + 32*((value-temp)*dir.x),
+							parent.y + ((32*((value-temp)*dir.y))),
 							20*i
 						);
 					}
@@ -183,10 +184,12 @@ function activarTrigger(){
     glish.glish.x = enemigoBoss.x;
     glish.glish.y = enemigoBoss.y+250;
     enemigoBoss.teleportar = false;
+    enemigoBoss.block = scene.add.rectangle(enemigoBoss.x-5,enemigoBoss.y+420, 600, 100);
+    scene.physics.add.existing(enemigoBoss.block, true);
+    enemigoBoss.block.body.enable = true;
   }
-  enemigoBoss.block = scene.add.rectangle(enemigoBoss.x-5,enemigoBoss.y+420, 600, 100);
-  scene.physics.add.existing(enemigoBoss.block, true);
-  enemigoBoss.block.body.enable = true;
+
+
 
   scene.physics.add.collider(glish.glish, enemigoBoss.block);
 
@@ -259,8 +262,18 @@ export function updateBoss(){
   }
 
   if(enemigoBoss.vida <= 0){
-      enemigoBoss.block.destroy();
-      enemigoBoss.muerto = true;
-      enemigoBoss.trigger.activado = false;
+    Phaser.Actions.Call(tentacleList.getChildren(), function(pata){
+
+      Phaser.Actions.Call(pata.segmentos.getChildren(), function(go){
+        go.destroy();
+       
+      })
+
+    pata.setAlpha(0)
+    
+    });
+
+    enemigoBoss.block.destroy();
+
   }
 }

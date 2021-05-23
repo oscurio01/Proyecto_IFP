@@ -6,7 +6,26 @@ import * as enemigos from '../enemigos.js';
 import * as portal from '../portal.js';
 import * as npc from '../NPC.js';
 import * as swampBoss from '../SwampBoss.js'
-console.clear();
+
+var scene;
+var camera;
+var gameOver;
+var fondoAguaBuena;
+var fondo;
+var tileSpawner;
+export var enemyList;
+var bossMuerto = false;
+var fpsText;
+var suelo;
+var poisonTiles;
+var poisonAspectTiles;
+var poisonTilesId;
+var cutTiles;
+var cutTilesId;
+var cutTiles2;
+var cutTilesId2;
+var pausado = false;
+
 var config = {
     type: Phaser.AUTO,
     width: 400,
@@ -40,25 +59,6 @@ var config = {
 
 var game=new Phaser.Game(config);
 
-var scene;
-var camera;
-var gameOver;
-var fondoAguaBuena;
-var fondo;
-var tileSpawner;
-export var enemyList;
-
-var fpsText;
-var suelo;
-var poisonTiles;
-var poisonAspectTiles;
-var poisonTilesId;
-var cutTiles;
-var cutTilesId;
-var cutTiles2;
-var cutTilesId2;
-
-var pausado = false;
 
 function preload(){
 
@@ -154,9 +154,9 @@ function create(){
             mosquitos.createEnemyMosquito(obj, config, enemyList);
         }else if(obj.name == 'conseguir_glish'){
             npc.create(obj);        
-        }else if(obj.name == 'BossCalamar'){
+        }else if(obj.name == 'BossCalamar' && !bossMuerto){
             swampBoss.createBoss(obj, config, enemyList);
-        }else if(obj.name == 'tentaculos'){
+        }else if(obj.name == 'tentaculos' && !bossMuerto){
             swampBoss.generateTentacles(obj);
         }
 
